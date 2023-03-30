@@ -1,0 +1,213 @@
+{
+	"info": {
+		"_postman_id": "25dfda6e-7437-4613-a64b-811eeb3ae3d3",
+		"name": "queries",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18857299"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Magento-Environment-Id",
+						"value": "{{Magento-Environment-Id}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Store-View-Code",
+						"value": "{{Magento-Store-View-Code}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Website-Code",
+						"value": "{{Magento-Website-Code}}",
+						"type": "default"
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Store-Code",
+						"value": "{{Magento-Store-Code}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Customer-Group",
+						"value": "{{Magento-Customer-Group}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query($skus: [String!]) {\n    products(skus: $skus) {\n       __typename\n        id\n        sku\n        name\n        description\n        shortDescription\n        metaDescription\n        metaKeyword\n        metaTitle\n        addToCartAllowed\n        url\n        images(roles: []) {\n            url\n            label\n            roles\n        }\n        attributes(roles: []) {\n            name\n            label\n            value\n            roles\n        }\n        ... on SimpleProductView {\n            price {\n                final {\n                    amount {\n                        value\n                        currency\n                    }\n                }\n                regular {\n                    amount {\n                        value\n                        currency\n                    }\n                }\n                roles \n            }\n        }\n        ... on ComplexProductView {\n            options {\n                id\n                title\n                required\n                multi\n                values {\n                    id\n                    title \n                    ... on ProductViewOptionValueProduct {\n                        title,\n                        quantity,\n                        isDefault,\n                        product {\n                            sku\n                            shortDescription\n                            name\n                            price {\n                                final {\n                                    amount {\n                                        value\n                                        currency\n                                    }\n                                }\n                                regular {\n                                    amount {\n                                        value\n                                        currency\n                                    }\n                                }\n                                roles\n                            }\n                        }\n                    }\n                    ... on ProductViewOptionValueSwatch {\n                        id \n                        title\n                        type\n                        value\n                    }\n                }\n            }\n            priceRange {\n                maximum {\n                    final {\n                        amount {\n                            value\n                            currency\n                        }\n                    }\n                    regular {\n                        amount {\n                            value\n                            currency\n                        }\n                    }\n                    roles\n                }\n                minimum {\n                    final {\n                        amount {\n                            value\n                            currency\n                        }\n                    }\n                    regular {\n                        amount {\n                            value\n                            currency\n                        }\n                    }\n                    roles\n                }\n            }\n        }\n    }\n}",
+						"variables": "{\n    \"skus\": [\"MH07\", \"24-WG080\"]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}",
+					"host": [
+						"{{endpoint}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Magento-Environment-Id",
+						"value": "{{Magento-Environment-Id}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Store-View-Code",
+						"value": "{{Magento-Store-View-Code}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Website-Code",
+						"value": "{{Magento-Website-Code}}",
+						"type": "default"
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Store-Code",
+						"value": "{{Magento-Store-Code}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Customer-Group",
+						"value": "{{Magento-Customer-Group}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query($phrase:String!) {\n    productSearch(phrase:$phrase){\n        total_count\n        suggestions\n        related_terms\n        page_info {\n            current_page\n            page_size\n            total_pages\n        }\n        facets {\n            title\n            attribute\n            type\n            buckets {\n                title\n            }\n        }\n        items {\n            productView {\n                description\n                id\n                metaDescription\n                metaKeyword\n                metaTitle\n                shortDescription\n                addToCartAllowed\n                name\n                sku\n                ...on SimpleProductView {\n                    price {\n                        final {\n                            amount {\n                                value\n                                currency\n                            }\n                        }\n                        regular {\n                            amount {\n                                value\n                                currency\n                            }\n                        }\n                        roles\n                    }\n                }\n                ...on ComplexProductView {\n                    options {\n                        id\n                        title\n                        required\n                        values {\n                            id\n                            title\n                            ... on ProductViewOptionValueProduct {\n                                title,\n                                quantity,\n                                isDefault,\n                                product {\n                                    sku\n                                    shortDescription\n                                    name\n                                    price {\n                                        final {\n                                            amount {\n                                                value\n                                                currency\n                                            }\n                                        }\n                                        regular {\n                                            amount {\n                                                value\n                                                currency\n                                            }\n                                        }\n                                        roles\n                                    }\n                                }\n                            }                             \n                        }\n                    }\n                    priceRange {\n                        maximum {\n                            final {\n                                amount {\n                                    value\n                                    currency\n                                }\n                            }\n                            regular {\n                                amount {\n                                    value\n                                    currency\n                                }\n                            }\n                            roles\n                        }\n                        minimum {\n                            final {\n                                amount {\n                                    value\n                                    currency\n                                }\n                            }\n                            regular {\n                                amount {\n                                    value\n                                    currency\n                                }\n                            }\n                            roles\n                        }\n                    }\n                }\n            }\n            highlights {\n                attribute\n                value\n                matched_words\n            }\n            applied_query_rule {\n                rule_id\n                rule_name\n                action_type\n            }\n        }\n    }\n}",
+						"variables": "{\n    \"phrase\": \"top\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}",
+					"host": [
+						"{{endpoint}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RefineProduct",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Magento-Environment-Id",
+						"value": "{{Magento-Environment-Id}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Store-View-Code",
+						"value": "{{Magento-Store-View-Code}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Website-Code",
+						"value": "{{Magento-Website-Code}}",
+						"type": "default"
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Store-Code",
+						"value": "{{Magento-Store-Code}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Customer-Group",
+						"value": "{{Magento-Customer-Group}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query($sku: String!, $optionIds: [String!]!) {\n    refineProduct(sku: $sku, optionIds: $optionIds) {\n       __typename\n        id\n        sku\n        name\n        description\n        shortDescription\n        metaDescription\n        metaKeyword\n        metaTitle\n        addToCartAllowed\n        url\n        images(roles: []) {\n            url\n            label\n            roles\n        }\n        attributes(roles: []) {\n            name\n            label\n            value\n            roles\n        }\n        ... on SimpleProductView {\n            price {\n                final {\n                    amount {\n                        value\n                        currency\n                    }\n                }\n                regular {\n                    amount {\n                        value\n                        currency\n                    }\n                }\n                roles \n            }\n        }\n        ... on ComplexProductView {\n            options {\n                id\n                title\n                required\n                multi\n                values {\n                    id\n                    title \n                    ... on ProductViewOptionValueProduct {\n                        title,\n                        quantity,\n                        isDefault,\n                        product {\n                            sku\n                            shortDescription\n                            name\n                            price {\n                                final {\n                                    amount {\n                                        value\n                                        currency\n                                    }\n                                }\n                                regular {\n                                    amount {\n                                        value\n                                        currency\n                                    }\n                                }\n                                roles\n                            }\n                        }\n                    }\n                    ... on ProductViewOptionValueSwatch {\n                        id \n                        title\n                        type\n                        value\n                    }\n                }\n            }\n            priceRange {\n                maximum {\n                    final {\n                        amount {\n                            value\n                            currency\n                        }\n                    }\n                    regular {\n                        amount {\n                            value\n                            currency\n                        }\n                    }\n                    roles\n                }\n                minimum {\n                    final {\n                        amount {\n                            value\n                            currency\n                        }\n                    }\n                    regular {\n                        amount {\n                            value\n                            currency\n                        }\n                    }\n                    roles\n                }\n            }\n        }\n    }\n}",
+						"variables": "{\n    \"sku\": \"MH07\",\n    \"optionIds\": [\"Y29uZmlndXJhYmxlLzE4Ni8xODM=\"]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}",
+					"host": [
+						"{{endpoint}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Magento-Environment-Id",
+						"value": "{{Magento-Environment-Id}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Store-View-Code",
+						"value": "{{Magento-Store-View-Code}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Website-Code",
+						"value": "{{Magento-Website-Code}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Customer-Group",
+						"value": "{{Magento-Customer-Group}}",
+						"type": "default"
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Categories($roles: [String!], $ids: [String!], $subtree: Subtree) {\n  categories(roles: $roles, ids: $ids, subtree: $subtree) {\n    name\n    id\n    level\n    urlPath\n    parentId\n    roles\n    children\n  }\n}",
+						"variables": "{\n    \"ids\": [\"20\"],\n    \"roles\": [\"show_in_menu\"],\n    \"subtree\": {\n       \"depth\": 3,\n       \"startLevel\": 1\n   }\n}"
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}",
+					"host": [
+						"{{endpoint}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
