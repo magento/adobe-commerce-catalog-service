@@ -1,0 +1,7 @@
+### Frequently asked questions on Catalog sync for Catalog Service for Adobe Commerce
+
+Are there different data stores for Live Search and Catalog Service?
+Yes, there are different data stores but same catalog sync process via the PHP exporters.
+If any inconsistencies it is recommended to run ```saas:resync``` commands but append ```--cleanup-feed``` to each of them.
+And remember that ```saas:resync``` should also run the indexers unless you add the ```no-reindex``` flag.
+

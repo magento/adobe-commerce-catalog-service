@@ -1,0 +1,21 @@
+### Frequently asked questions on using the Adobe Commerce PDP dropin storefront component
+
+Where to find latest PDP dropin components?
+The components can be found on NPM JS website: <script src="https://www.npmjs.com/package/@dropins/storefront-pdp"></script>
+
+And also components are published on CDN:
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Storefront</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@dropins/tools@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@dropins/storefront-pdp@latest"></script>
+</head>
+
+How to work with the dropin initialisers?
+This is a good starting point, perform an ```initializers.mount``` to load the initial catalog data, use ```fallbackData``` to set any data that is missing.
+https://elsie.dev/?path=/docs/api-initializer--overview
+
+Should Dropins use conditional chaining ```?.``` in Edge Delivery (EDS) projects?
+In the past we have avoided to use conditional chaining in other Edge Delivery Service projects as it is not yet fully supported, however we anyway need at least dynamic imports. The step up to conditional chaining is only minimal.
