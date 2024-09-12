@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "429a3987-2378-4170-b8ce-aa22714a2dfc",
-		"name": "queries",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23918518"
+		"_postman_id": "9e9b5097-2247-4d47-9f7a-0fbcd0141e0e",
+		"name": "Public Postmant Collections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "31782535"
 	},
 	"item": [
 		{
@@ -49,12 +49,7 @@
 						"variables": "{\n    \"skus\": [\"MH07\", \"24-WG080\"]\n}"
 					}
 				},
-				"url": {
-					"raw": "{{endpoint}}",
-					"host": [
-						"{{endpoint}}"
-					]
-				}
+				"url": "{{endpoint}}"
 			},
 			"response": []
 		},
@@ -101,12 +96,7 @@
 						"variables": "{\n    \"phrase\": \"top\"\n}"
 					}
 				},
-				"url": {
-					"raw": "{{endpoint}}",
-					"host": [
-						"{{endpoint}}"
-					]
-				}
+				"url": "{{endpoint}}"
 			},
 			"response": []
 		},
@@ -153,12 +143,54 @@
 						"variables": "{\n    \"sku\": \"MH07\",\n    \"optionIds\": [\"Y29uZmlndXJhYmxlLzE4Ni8xODM=\"]\n}"
 					}
 				},
-				"url": {
-					"raw": "{{endpoint}}",
-					"host": [
-						"{{endpoint}}"
-					]
-				}
+				"url": "{{endpoint}}"
+			},
+			"response": []
+		},
+		{
+			"name": "AllVariants",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Magento-Environment-Id",
+						"value": "{{Magento-Environment-Id}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Store-View-Code",
+						"value": "{{Magento-Store-View-Code}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Website-Code",
+						"value": "{{Magento-Website-Code}}",
+						"type": "default"
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Store-Code",
+						"value": "{{Magento-Store-Code}}",
+						"type": "default"
+					},
+					{
+						"key": "Magento-Customer-Group",
+						"value": "{{Magento-Customer-Group}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query($sku: String!, $optionIds: [String!], $pageSize: Int, $cursor: String) {\n    variants(sku: $sku, optionIds: $optionIds, pageSize: $pageSize, cursor: $cursor) {\n        variants {\n            product {\n                __typename\n                sku\n        \n            }\n        }\n        cursor\n    }\n}",
+						"variables": "{\n    \"sku\": \"MH07\",\n    \"optionIds\": [\"Y29uZmlndXJhYmxlLzE4Ni8xNzY=\"],\n    \"pageSize\": 5\n}"
+					}
+				},
+				"url": "{{endpoint}}"
 			},
 			"response": []
 		},
@@ -200,12 +232,7 @@
 						"variables": "{\n    \"ids\": [\"20\"],\n    \"roles\": [\"show_in_menu\"],\n    \"subtree\": {\n       \"depth\": 3,\n       \"startLevel\": 1\n   }\n}"
 					}
 				},
-				"url": {
-					"raw": "{{endpoint}}",
-					"host": [
-						"{{endpoint}}"
-					]
-				}
+				"url": "{{endpoint}}"
 			},
 			"response": []
 		}
